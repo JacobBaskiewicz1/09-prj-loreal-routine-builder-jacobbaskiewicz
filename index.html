@@ -23,8 +23,8 @@
         <h1 class="site-title">Smart Routine &amp; Product Advisor</h1>
       </header>
 
-      <!-- Category Filter -->
-      <div class="search-section">
+      <!-- Category Filter & Product Search -->
+      <div class="search-section" style="gap: 12px; flex-wrap: wrap">
         <select id="categoryFilter">
           <option value="" disabled selected>Choose a Category</option>
           <option value="cleanser">Cleansers</option>
@@ -37,6 +37,20 @@
           <option value="suncare">Suncare</option>
           <option value="fragrance">Fragrance</option>
         </select>
+        <input
+          id="productSearch"
+          type="text"
+          placeholder="Search products..."
+          style="
+            flex: 2;
+            min-width: 180px;
+            padding: 14px 12px;
+            font-size: 17px;
+            border: 2px solid #e3a535;
+            border-radius: 8px;
+            outline: none;
+          "
+        />
       </div>
 
       <!-- Products Grid -->

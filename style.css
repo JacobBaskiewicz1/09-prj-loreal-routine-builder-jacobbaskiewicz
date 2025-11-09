@@ -1,3 +1,40 @@
+.product-card {
+  position: relative;
+}
+
+.product-desc-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.98);
+  color: #222;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px 0 rgba(227, 165, 53, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 18px 18px 130px;
+  z-index: 2;
+}
+.product-card .product-desc-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+.desc-content {
+  font-size: 0.98rem;
+  color: #222;
+  background: #fffdfa;
+  border-left: 4px solid #e3a535;
+  padding: 12px 18px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(255, 0, 59, 0.06);
+  max-width: 320px;
+}
 /* —— basic reset —— */
 * {
   box-sizing: border-box;
@@ -8,9 +45,11 @@
 /* —— body + fonts —— */
 body {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
+  color: #222;
+  background: linear-gradient(120deg, #fff 0%, #ffe5ec 100%);
   display: flex;
   justify-content: center;
+  min-height: 100vh;
 }
 
 .page-wrapper {
@@ -31,9 +70,12 @@ body {
 }
 
 .site-title {
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 2.2rem;
+  font-weight: 700;
   margin-bottom: 10px;
+  color: #ff003b;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px #ffe5ec;
 }
 
 /* category filter */
@@ -46,29 +88,36 @@ body {
   width: 100%;
   padding: 16px;
   font-size: 18px;
-  border: 2px solid #000;
+  border: 2px solid #e3a535;
   border-radius: 8px;
   cursor: pointer;
-  background-color: white;
+  background-color: #fffdfa;
   font-weight: 500;
+  color: #222;
+  transition: border 0.2s;
 }
 
 .search-section select:focus {
   outline: none;
-  border-color: #666;
+  border-color: #ff003b;
 }
 
 /* chat section */
 .chatbox {
   margin: 40px 0;
-  border: 2px solid #000;
-  border-radius: 8px;
-  padding: 26px;
+  border: 2px solid #e3a535;
+  border-radius: 16px;
+  padding: 32px 26px 26px 26px;
+  background: #fffdfa;
+  box-shadow: 0 4px 24px 0 rgba(227, 165, 53, 0.1),
+    0 1.5px 8px 0 rgba(255, 0, 59, 0.08);
 }
 
 .chatbox h2 {
-  font-size: 20px;
+  font-size: 1.4rem;
   margin-bottom: 20px;
+  color: #ff003b;
+  font-weight: 600;
 }
 
 .chat-window {
@@ -77,8 +126,10 @@ body {
   line-height: 1.5;
   height: 250px;
   overflow-y: auto;
-  background: #fafafa;
+  background: linear-gradient(90deg, #ffe5ec 60%, #fffdfa 100%);
   margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1.5px solid #e3a535;
 }
 
 /* placeholder message */
@@ -113,7 +164,7 @@ body {
 
 .chat-form button {
   font-size: 18px;
-  background: #000;
+  background: linear-gradient(90deg, #ff003b 60%, #e3a535 100%);
   color: #fff;
   border: none;
   padding: 12px;
@@ -123,11 +174,14 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(255, 0, 59, 0.08);
+  transition: background 0.2s, box-shadow 0.2s;
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: linear-gradient(90deg, #e3a535 0%, #ff003b 100%);
+  box-shadow: 0 4px 16px 0 rgba(255, 0, 59, 0.13);
 }
 
 .chat-form button:focus {
@@ -180,12 +234,25 @@ body {
 
 .product-card {
   flex: 0 1 calc(33.333% - 14px);
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 4px;
+  border: 2px solid #e3a535;
+  padding: 18px 15px;
+  border-radius: 10px;
   display: flex;
   gap: 15px;
   min-height: 160px;
+  background: linear-gradient(90deg, #ffe5ec 60%, #fffdfa 100%);
+  box-shadow: 0 2px 8px rgba(227, 165, 53, 0.07);
+  transition: box-shadow 0.2s, border 0.2s;
+}
+.product-card.selected {
+  border: 3px solid #ff003b;
+  box-shadow: 0 0 0 4px #ffe5ec, 0 8px 32px 0 rgba(255, 0, 59, 0.18);
+  background: linear-gradient(90deg, #fffdfa 60%, #ffe5ec 100%);
+}
+.product-card:hover {
+  box-shadow: 0 8px 32px 0 rgba(255, 0, 59, 0.13),
+    0 2px 12px 0 rgba(227, 165, 53, 0.1);
+  border-color: #ff003b;
 }
 
 .product-card img {
@@ -204,26 +271,33 @@ body {
 }
 
 .product-card h3 {
-  font-size: 16px;
+  font-size: 1.1rem;
   margin-bottom: 8px;
+  color: #ff003b;
+  font-weight: 700;
 }
 
 .product-card p {
   font-size: 14px;
-  color: #666;
+  color: #e3a535;
 }
 
 /* selected products */
 .selected-products {
   margin: 40px 0;
-  padding: 20px;
-  border: 2px solid #000;
-  border-radius: 8px;
+  padding: 24px 20px 20px 20px;
+  border: 2px solid #ff003b;
+  border-radius: 16px;
+  background: #fffdfa;
+  box-shadow: 0 4px 24px 0 rgba(255, 0, 59, 0.1),
+    0 1.5px 8px 0 rgba(227, 165, 53, 0.08);
 }
 
 .selected-products h2 {
-  font-size: 20px;
+  font-size: 1.3rem;
   margin-bottom: 20px;
+  color: #e3a535;
+  font-weight: 600;
 }
 
 #selectedProductsList {
@@ -237,17 +311,29 @@ body {
   margin-top: 20px;
   padding: 16px;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   color: #fff;
-  background: #000;
+  background: linear-gradient(90deg, #ff003b 60%, #e3a535 100%);
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s;
+  box-shadow: 0 2px 8px 0 rgba(255, 0, 59, 0.08);
+  letter-spacing: 1px;
+  transition: background 0.2s, box-shadow 0.2s;
 }
 
 .generate-btn:hover {
-  background: #666;
+  background: linear-gradient(90deg, #e3a535 0%, #ff003b 100%);
+  box-shadow: 0 4px 16px 0 rgba(255, 0, 59, 0.13);
+}
+/* L'Oréal accent bar for unique touch */
+.loreal-accent-bar {
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, #ff003b 60%, #e3a535 100%);
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px 0 rgba(255, 0, 59, 0.08);
 }
 
 .generate-btn i {
